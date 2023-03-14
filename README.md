@@ -17,7 +17,12 @@ git clone https://github.com/username/repo-name.git
 cd repo-name
 ```
 
-**3.** 🏃‍♀️ Run the `main.py` script using the command:
+**3.** 📝 Install dependencies using the command:
+```terminal
+pip install -r requirements.txt
+```
+
+**4.** 🏃‍♀️ Run the `main.py` script using the command:
 ```terminal
 python3 main.py
 ```
