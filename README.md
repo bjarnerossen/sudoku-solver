@@ -1,5 +1,5 @@
 # 🧩 Terminal Based Sudoku Generator and Solver
-This is a terminal-based Sudoku generator and solver written in Python. It provides four difficulty levels to choose from: easy, medium, intermediate, and extreme. The program generates Sudoku puzzles using backtracking algorithm and solves them using an algorithm.
+This is a terminal-based Sudoku generator and solver written in Python. It provides four difficulty levels to choose from: easy, medium, intermediate, and extreme. The program generates Sudoku puzzles using backtracking algorithm.
 
 ## Getting Started
 ### Perequisites
@@ -36,4 +36,4 @@ To solve the Sudoku puzzle, enter solve command. The solution will be displayed 
 This project is licensed under the MIT License. 
 
 ### NextUp
-PyInquirer for the interactive command-line interface
+PyGame to make the game interactive
