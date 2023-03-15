@@ -9,12 +9,12 @@ This is a terminal-based Sudoku generator and solver written in Python. It provi
 ### Installation
 **1.** 📥 Clone the repository to your local machine using the command:
 ```terminal
-git clone https://github.com/username/repo-name.git
+git clone https://github.com/bjarnerossen/sudoku-solver.git
 ```
 
 **2.** 📂 Change directory to the project folder:
 ```terminal
-cd repo-name
+cd sudoku-solver
 ```
 
 **3.** 📝 Install dependencies using the command:
@@ -28,9 +28,7 @@ python3 main.py
 ```
 
 ### Usage
-The program presents a menu to choose the difficulty level for the Sudoku puzzle. After choosing the difficulty level, a Sudoku puzzle will be generated and displayed on the terminal. The empty cells will be denoted by dots (.).
-
-You can fill in the empty cells by entering the row and column number of the cell followed by the value to be inserted. For example, to insert 5 in the cell at row 2 and column 3, enter 2 3 5.
+The program presents a menu to choose the difficulty level for the Sudoku puzzle. After choosing the difficulty level, a Sudoku puzzle will be generated and displayed on the terminal. The empty cells will be denoted by a question mark (?).
 
 To solve the Sudoku puzzle, enter solve command. The solution will be displayed on the terminal.
 
