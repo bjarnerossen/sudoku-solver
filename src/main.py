@@ -6,12 +6,13 @@ import sys # Used to handle keyboard interrupt and exit the program
 # helper functions
 import helpers # Contains helper functions to generate and solve Sudoku puzzles
 from printer import print_puzzle, print_solution
+import ui
 
 # Define the difficulty levels as a dictionary
 DIFFICULTY_LEVELS = {
     1: "Easy",
     2: "Medium",
-    3: "Intermediate",
+    3: "Hard",
     4: "Extreme"
 }
 
@@ -23,36 +24,35 @@ def main():
     difficulty = get_user_difficulty()
 
     # Generate Sudoku board and its copy
-    puzzle = helpers.generate_sudoku_board(difficulty)
-    puzzle_copy = deepcopy(puzzle)
-    
-    # Solve Sudoku board
-    solution = helpers.solve_sudoku(puzzle)
+    puzzle, solution = helpers.generate_sudoku_board(difficulty)
     
     # Print the original puzzle
     print(colored("\nPUZZLE:", attrs=["bold"]))
-    print_puzzle(puzzle_copy)
+    print_puzzle(puzzle)
 
-    # Prompt the user for input and provide options
-    while True:
-        try:
-            user_input = str(input(colored("> ", attrs=["bold"])))
-            if not validate_user_input(user_input):
-                raise ValueError
-            if user_input.strip() == "":
-                pass
-            if user_input.lower() in ["help", "h"]:
-                print_help_message()
-            elif user_input.lower() in ["solve", "s"]:
-                    # Print the puzzle and its solution
-                    print()
-                    print(colored("SOLUTION:", attrs=["bold"]))
-                    print_solution(puzzle_copy, solution)
-                    break
-        except ValueError:
-                pass
-        except KeyboardInterrupt:
-            sys.exit()
+    # Start the command-line-interface
+    ui.play_game(puzzle, solution)
+
+    # # Prompt the user for input and provide options
+    # while True:
+    #     try:
+    #         user_input = str(input(colored("> ", attrs=["bold"])))
+    #         if not validate_user_input(user_input):
+    #             raise ValueError
+    #         if user_input.strip() == "":
+    #             pass
+    #         if user_input.lower() in ["help", "h"]:
+    #             print_help_message()
+    #         elif user_input.lower() in ["solve", "s"]:
+    #                 # Print the puzzle and its solution
+    #                 print()
+    #                 print(colored("SOLUTION:", attrs=["bold"]))
+    #                 print_solution(puzzle, solution)
+    #                 break
+    #     except ValueError:
+    #             pass
+    #     except KeyboardInterrupt:
+    #         sys.exit()
 
 def print_user_menu():
     """Prints the user menu."""

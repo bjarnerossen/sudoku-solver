@@ -1,4 +1,5 @@
 import random
+from copy import deepcopy
 
 def generate_sudoku_board(difficulty=1):
     # create empty board only containing zeros
@@ -10,7 +11,8 @@ def generate_sudoku_board(difficulty=1):
     random.shuffle(board[0])
 
     # fill in the rest of board
-    solve_sudoku(board)
+    board = solve_sudoku(board)
+    solved = deepcopy(board)
 
     # define num_cells based on difficulty
     if difficulty == 1:
@@ -25,7 +27,7 @@ def generate_sudoku_board(difficulty=1):
     # randomly remove cells based on given difficulty
     remove_cells(board, num_cells)
 
-    return board
+    return board, solved
 
 def solve_sudoku(board):
     # find the first empty cell
