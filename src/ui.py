@@ -6,8 +6,8 @@ from printer import print_puzzle, print_solution, update_puzzle
 
 def play_game(puzzle, solution):
     VALID_NUMS = [1,2,3,4,5,6,7,8,9]
-    puzzle = puzzle
-    original = deepcopy(puzzle)
+    original = puzzle
+    puzzle = deepcopy(original)
     score = 0
     game = True
     while game:
@@ -30,11 +30,11 @@ def play_game(puzzle, solution):
                     print("Score: " + colored(f"{score}", attrs=["bold"]) + colored("   -1", "red", attrs=["bold"]))
                     game = True
                 else:
-                    original[x][y] = solution[x][y]
+                    original[x][y] = int(num_guess)
                     score += 1
                     print(colored("correct num", "green"))
                     print("Score: " + colored(f"{score}", attrs=["bold"]) + colored("   +1", "green", attrs=["bold"]))
-                    print(update_puzzle(puzzle, solution, x, y))
+                    update_puzzle(puzzle, original, x, y)
                     # find the first empty cell
                     row, _ = helpers.find_empty_cell(puzzle)
                  
@@ -49,6 +49,8 @@ def play_game(puzzle, solution):
         except KeyboardInterrupt:
             sys.exit()
 
+    return False
+    
 def is_correct_answer(num_guess, x, y, solution):
     if int(num_guess) == int(solution[x][y]):
         return True

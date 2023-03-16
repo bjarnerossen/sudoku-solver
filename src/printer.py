@@ -41,7 +41,7 @@ def update_puzzle(original, puzzle, x, y):
     for i, row in enumerate(original):
         new_row = []
         for j, n in enumerate(row):
-            if original[i][j] != puzzle[i][j]:
+            if original[i][j] == 0 and puzzle[i][j] != 0:
                 n = puzzle[i][j]
                 new_row.append(colored(f" {symbol[n]} ", "green", attrs=["bold"]))
             else:
