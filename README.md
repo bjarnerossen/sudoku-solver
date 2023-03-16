@@ -33,7 +33,7 @@ The program presents a menu to choose the difficulty level for the Sudoku puzzle
 To solve the Sudoku puzzle, enter solve command. The solution will be displayed on the terminal.
 
 ### Demo
-<img src="/img/demo.png" width=50% height=20%>
+<img src="/img/demo.png" width=50% height=20%> 
 
 ### License
 This project is licensed under the MIT License. 
