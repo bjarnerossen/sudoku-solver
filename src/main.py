@@ -2,8 +2,6 @@ from copy import deepcopy # Used to create a deep copy of the Sudoku board
 import terminaltables # Used to print the user menu in a tabular format
 from termcolor import colored # Used to colorize output text
 import sys # Used to handle keyboard interrupt and exit the program
-
-import itertools
 import helpers # Contains helper functions to generate and solve Sudoku puzzles
 
 # Define the difficulty levels as a dictionary
@@ -35,9 +33,11 @@ def main():
     # Prompt the user for input and provide options
     while True:
         try:
-            user_input = str(input())
+            user_input = str(input(colored("> ", attrs=["bold"])))
             if not validate_user_input(user_input):
                 raise ValueError
+            if user_input.strip() == "":
+                pass
             if user_input.lower() in ["help", "h"]:
                 print_help_message()
             elif user_input.lower() in ["solve", "s"]:
@@ -47,7 +47,7 @@ def main():
                     print_solution(puzzle_copy, solution)
                     break
         except ValueError:
-                print('Command not found. Options: "help", "solve", "h", "s"')
+                pass
         except KeyboardInterrupt:
             sys.exit()
 
@@ -128,8 +128,17 @@ def print_solution(puzzle, solved):
     line4  = "  "+expandLine("╚═══╧═══╩═══╝")
 
     symbol = " 123456789" if base <= 3 else " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    nums   = [ [""]+[f"({symbol[-n]})" if n<0 else f" {symbol[n]} "  for n in row]
-               for row in puzzle ]
+    nums = []
+    for i, row in enumerate(puzzle):
+        new_row = []
+        for j, n in enumerate(row):
+            if n == 0:
+                n = solved[i][j]
+                new_row.append(colored(f" {symbol[n]} ", "green", attrs=["bold"]))
+            else:
+                new_row.append(f" {symbol[n]} ")
+        nums.append([""] + new_row)
+
     coord  = "   "+"".join(f" {s}  " for s in symbol[1:side+1])
     lines  = []
     lines.append(coord)
@@ -140,22 +149,6 @@ def print_solution(puzzle, solved):
         lines.append([line2,line3,line4][(r%side==0)+(r%base==0)])
     lines.append(coord)
     print(*lines,sep="\n")
-
-    # #________________________________________________
-    # """Prints the solved Sudoku board in a grid format with solutions in light green."""
-    # for i in range(len(solved)):
-    #     if i % 3 == 0:
-    #         print("+-------+-------+-------+")
-    #     for j in range(len(solved[i])):
-    #         if j % 3 == 0:
-    #             print("| ", end="")
-    #         if puzzle[i][j] == 0:
-    #             print(colored(str(solved[i][j]) + " ", "green", attrs=["bold"]), end="")
-    #         else:
-    #             print(str(solved[i][j]) + " ", end="")
-    #         if j == 8:
-    #             print("|")
-    # print("+-------+-------+-------+")
 
 if __name__ == "__main__":
     main()
