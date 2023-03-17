@@ -1,41 +1,47 @@
-import terminaltables # Used to print the user menu in a tabular format
-from termcolor import colored # Used to colorize output text
-import sys # Used to handle keyboard interrupt and exit the program
+from termcolor import colored
 from copy import deepcopy
+import sys
+import inquirer
 
-# helper functions
-import logic # Contains logic to generate and solve Sudoku puzzles
+import logic
 from printer import print_puzzle, print_solution
 from game import SudokuGame
 from solver import Solver
 
 def main():
+    menu_choices = [
+        inquirer.List('menu_choice',
+                      message="What would you like to do?",
+                      choices=[
+                          ('Generate a puzzle', 'generate'),
+                          ('Solve a puzzle', 'solve'),
+                          ('Play a game', 'play'),
+                          ('Quit', 'quit'),
+                      ],
+        )
+    ]
+
     while True:
-        print("1. Generate a puzzle")
-        print("2. Solve a puzzle")
-        print("3. Play a game")
-        print("4. Quit")
+        answers = inquirer.prompt(menu_choices)
 
-        choice = int(input("Enter your choice: "))
+        if answers is None or answers['menu_choice'] == 'quit':
+            # Quit
+            break
 
-        if choice == 1:
+        elif answers['menu_choice'] == 'generate':
             # Generate a new Sudoku puzzle board and solve it
             puzzle, solution = logic.generate_sudoku_board()
             original = deepcopy(puzzle)
             print_puzzle(original)
             print_solution(original, solution)
 
-        elif choice == 2:
+        elif answers['menu_choice'] == 'solve':
             solver = Solver()
             solver.solve()
-        
-        elif choice == 3:
+
+        elif answers['menu_choice'] == 'play':
             game = SudokuGame()
             game.play_game()
-
-        elif choice == 4:
-            # Quit
-            break
 
         else:
             print("Invalid choice. Please try again.")
