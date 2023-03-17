@@ -1,4 +1,3 @@
-from copy import deepcopy # Used to create a deep copy of the Sudoku board
 import terminaltables # Used to print the user menu in a tabular format
 from termcolor import colored # Used to colorize output text
 import sys # Used to handle keyboard interrupt and exit the program

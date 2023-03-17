@@ -13,9 +13,13 @@ def play_game(puzzle, solution):
     while game:
         # Prompt the user for input and provide options
         try:
-            x, y = int(input(colored("x: ", attrs=["bold"]))), int(input(colored("y: ", attrs=["bold"])))
+            x = int(input(colored("x: ", attrs=["bold"]))) 
+            y = int(input(colored("y: ", attrs=["bold"])))
             if x not in VALID_NUMS or y not in VALID_NUMS:
                 raise ValueError
+            elif original[x-1][y-1] != 0:
+                print(colored("cell already solved", "red"))
+                pass
             else:
                 x = x-1
                 y = y-1
@@ -24,10 +28,13 @@ def play_game(puzzle, solution):
                 if not check_answer:
                     if score > 0:
                         score -= 1
+                        print("wrong num")
+                        print("Score: " + colored(f"{score}", attrs=["bold"]) + colored("   -1", "red", attrs=["bold"]))
                     else:
+                        print("wrong num")
+                        print("Score: " + colored(f"{score}", attrs=["bold"]))
                         pass
-                    print("wrong num")
-                    print("Score: " + colored(f"{score}", attrs=["bold"]) + colored("   -1", "red", attrs=["bold"]))
+                    print_puzzle(original)
                     game = True
                 else:
                     original[x][y] = int(num_guess)
@@ -50,7 +57,7 @@ def play_game(puzzle, solution):
             sys.exit()
 
     return False
-    
+
 def is_correct_answer(num_guess, x, y, solution):
     if int(num_guess) == int(solution[x][y]):
         return True
