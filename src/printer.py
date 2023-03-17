@@ -25,7 +25,7 @@ def print_puzzle(board):
     lines.append(coord)
     print(*lines,sep="\n")
 
-def update_puzzle(original, puzzle, x, y):
+def print_updated_puzzle(original, puzzle, x, y):
     side    = len(original)
     base    = int(side**0.5)
     def expandLine(line):
@@ -41,9 +41,12 @@ def update_puzzle(original, puzzle, x, y):
     for i, row in enumerate(original):
         new_row = []
         for j, n in enumerate(row):
-            if original[i][j] == 0 and puzzle[i][j] != 0:
-                n = puzzle[i][j]
+            if original[i][j] == 0 and puzzle[i][j] != 0 and (i, j) == (x, y):
+                n = puzzle[x][y]
                 new_row.append(colored(f" {symbol[n]} ", "green", attrs=["bold"]))
+            elif original[i][j] == 0 and puzzle[i][j] != 0:
+                n = puzzle[i][j]
+                new_row.append(f" {symbol[n]} ")
             else:
                 new_row.append(f" {symbol[n]} ")
         nums.append([""] + new_row)
