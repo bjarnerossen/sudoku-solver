@@ -50,6 +50,3 @@ To select an option, simply use the arrow keys to highlight your choice and pres
 
 ### License
 This project is licensed under the MIT License. 
-
-### NextUp
-PyGame to make the game interactive
