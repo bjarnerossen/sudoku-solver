@@ -52,13 +52,13 @@ class Solver:
                 if len(puzzle) != 9 or any(len(row) != 9 for row in puzzle) or any(num not in range(10) for row in puzzle for num in row):
                     raise ValueError(colored("Invalid puzzle format or values.", "yellow"))
         
-                # Check if the puzzle is solvable
-                if solve_sudoku(puzzle) is None:
-                    raise ValueError(colored("The puzzle is not solvable.", "red"))
-                
                 # Solve the puzzle
                 solution = solve_sudoku(puzzle)
-        
+
+                # Check if the puzzle is solvable
+                if solution is None:
+                    raise ValueError(colored("The puzzle is not solvable.", "red"))
+
                 # Print the solution
                 print_solution(original, solution)
         

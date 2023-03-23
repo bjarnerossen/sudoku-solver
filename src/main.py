@@ -8,6 +8,10 @@ from printer import print_puzzle, print_solution
 from game import SudokuGame
 from solver import Solver
 
+import ctypes
+
+
+
 def main():
     menu_choices = [
         inquirer.List('menu_choice',

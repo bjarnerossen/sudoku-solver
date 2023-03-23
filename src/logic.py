@@ -1,5 +1,6 @@
 import random
 from copy import deepcopy
+from helpers import time_it
 
 def generate_sudoku_board(difficulty=1):
     # create empty board only containing zeros
@@ -29,6 +30,7 @@ def generate_sudoku_board(difficulty=1):
 
     return board, solved
 
+@time_it
 def solve_sudoku(board):
     # find the first empty cell
     row, col = find_empty_cell(board)
